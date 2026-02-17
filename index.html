@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Monthsary Baby!💜</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Favicon Icon -->
+    <link rel="icon" type="image/png" href="favicon.jpg">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ffe6f0, #e6f7ff);
+            color: #333;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            height: 70px;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            height: 100%;
+        }
+        .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff6b9d;
+}
+
+.logo img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ff6b9d;
+}
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff6b9d;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 10px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .nav-links li a:hover {
+            color: #fff;
+            background: #ff6b9d;
+        }
+        .burger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .burger div {
+            width: 30px;
+            height: 4px;
+            background: #333;
+            margin: 4px 0;
+            transition: 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                right: 0;
+                top: 70px;
+                background: rgba(255, 255, 255, 0.95);
+                width: 250px;
+                height: 100vh;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 50px;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            }
+            .nav-links.active {
+                transform: translateX(0);
+            }
+            .burger {
+                display: flex;
+            }
+        }
+
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .carousel {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .carousel-slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+        .carousel-slide.active {
+            display: block;
+        }
+        .carousel-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #ff6b9d;
+        }
+        .carousel-content h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        section {
+            padding: 80px 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #ff6b9d;
+            text-align: center;
+        }
+
+        #cute-moments { background: #fff; }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        @media (max-width: 768px) {
+            .gallery { grid-template-columns: 1fr; }
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        #mini-games {
+            background: linear-gradient(135deg, #e6f7ff, #ffe6f0);
+        }
+        .game {
+            text-align: center;
+        }
+        canvas {
+            border: 2px solid #ff6b9d;
+            border-radius: 10px;
+            background: #fff;
+        }
+        .score {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #ff6b9d;
+        }
+        .game button {
+            margin: 10px;
+            padding: 10px 20px;
+            background: #ff6b9d;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .game button:hover {
+            background: #ff4f8b;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            
+        }
+    </style>
+</head>
+<body>
+
+<header>
+   <nav class="container">
+    <div class="logo">
+        <img src="logo2.jpg" alt="Logo">
+        <span>Happy Monthsary</span>
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#cute-moments">Cute Moments</a></li>
+        <li><a href="#mini-games">Mini Games</a></li>
+    </ul>
+
+    <div class="burger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</nav>
+
+</header>
+<section id="hero">
+    <div class="carousel">
+        <!-- Slide 1 -->
+        <div class="carousel-slide active" style="background-image: url('pic1.png');">
+            <div class="carousel-content">
+                <h1>Happy Monthsary Baby!</h1>
+                <p>Celebrating our love, one month at a time.</p>
+            </div>
+        </div>
+             <!-- Slide 3 (Video) -->
+<div class="carousel-slide">
+    <video class="carousel-video" autoplay muted loop playsinline>
+        <source src="video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="carousel-content">
+        <h1>Another Special Moment</h1>
+                <p>Every month with you is magical.</p>
+      
+    </div>
+</div>
+        <!-- Slide 2 -->
+        <div class="carousel-slide" style="background-image: url('pic5.png');">
+            <div class="carousel-content">
+                  <h1>Forever Us</h1>
+        <p>Here's to more memories together.</p>
+            </div>
+        </div>
+  
+
+    </div>
+</section>
+
+
+
+<script>
+const slides = document.querySelectorAll('.carousel-slide');
+let current = 0;
+
+function showSlide(index) {
+    slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+    });
+}
+
+// Auto-slide every 3 seconds
+setInterval(() => {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+}, 3000);
+</script>
+
+
+<section id="cute-moments">
+    <div class="container">
+        <h2>Cute Moments</h2>
+        <div class="gallery">
+            <div class="card"><img src="pic3.png"></div>
+            <div class="card"><img src="pic2.png"></div>
+            <div class="card"><img src="hero1.png"></div>
+            <div class="card"><img src="pic 4.png"></div>
+
+        </div>
+    </div>
+</section>
+
+<section id="mini-games">
+    <div class="container">
+        <h2>Mini Games</h2>
+        <div class="game">
+            <div class="score">Score: <span id="score">0</span></div>
+            <button id="startBtn">Start Game 💜</button>
+            <button id="restartBtn" style="display:none;">Restart Game 🔁</button>
+            <canvas id="snakeCanvas" width="400" height="400"></canvas>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2026 I love you so much po. Made with 💜</p>
+</footer>
+<script>
+function toggleMenu() {
+    document.querySelector('.nav-links').classList.toggle('active');
+}
+
+// Close burger menu when clicking a link
+document.querySelectorAll('.nav-links li a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.remove('active');
+    });
+});
+
+// Snake Game
+const canvas = document.getElementById('snakeCanvas');
+const ctx = canvas.getContext('2d');
+const box = 20;
+
+let snake, direction, food, score;
+let game = null;
+let isRunning = false;
+
+function initGame() {
+    snake = [{x: 9 * box, y: 10 * box}];
+    direction = '';
+    food = {x: Math.floor(Math.random() * 19) * box,
+            y: Math.floor(Math.random() * 19) * box};
+    score = 0;
+    document.getElementById('score').textContent = score;
+}
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (let i = 0; i < snake.length; i++) {
+        ctx.font = '20px Arial';
+        ctx.fillText('💜', snake[i].x, snake[i].y + box);
+    }
+
+    ctx.font = '20px Arial';
+    ctx.fillText('🤍', food.x, food.y + box);
+}
+
+function move() {
+    if (!direction) return;
+
+    let head = {x: snake[0].x, y: snake[0].y};
+
+    if (direction === 'LEFT') head.x -= box;
+    if (direction === 'UP') head.y -= box;
+    if (direction === 'RIGHT') head.x += box;
+    if (direction === 'DOWN') head.y += box;
+
+    if (head.x < 0 || head.x >= canvas.width ||
+        head.y < 0 || head.y >= canvas.height ||
+        collision(head, snake)) {
+        endGame();
+        return;
+    }
+
+    snake.unshift(head);
+
+    if (head.x === food.x && head.y === food.y) {
+        score++;
+        document.getElementById('score').textContent = score;
+
+        // 🎉 Special monthsary message at score 10
+        if(score === 5){
+            alert("Happy Monthsary, baby! 💜 Thank you for always being there. Every month with you is a treasure I cherish deeply. Thank you for loving me the way you do, for all the surprises that make me smile, and for making every moment so special. I’m so grateful for you, today and always 💜🤍");
+        }
+
+        food = {x: Math.floor(Math.random() * 19) * box,
+                y: Math.floor(Math.random() * 19) * box};
+    } else {
+        snake.pop();
+    }
+}
+
+function collision(head, array) {
+    for (let i = 0; i < array.length; i++) {
+        if (head.x === array[i].x && head.y === array[i].y) return true;
+    }
+    return false;
+}
+
+function startGame() {
+    if (isRunning) return;
+    initGame();
+    isRunning = true;
+    document.getElementById('startBtn').style.display = "none";
+    document.getElementById('restartBtn').style.display = "none";
+    game = setInterval(() => { draw(); move(); }, 200);
+}
+
+function endGame() {
+    clearInterval(game);
+    isRunning = false;
+    document.getElementById('restartBtn').style.display = "inline-block";
+    alert("Game Over 💔 sorry baby kiss na lang kita mwehehhehe.. Your score: " + score);
+}
+
+document.getElementById('startBtn').addEventListener("click", startGame);
+document.getElementById('restartBtn').addEventListener("click", startGame);
+
+document.addEventListener('keydown', (e) => {
+    if (!isRunning) return;
+
+    if (e.keyCode === 37 && direction !== 'RIGHT') direction = 'LEFT';
+    if (e.keyCode === 38 && direction !== 'DOWN') direction = 'UP';
+    if (e.keyCode === 39 && direction !== 'LEFT') direction = 'RIGHT';
+    if (e.keyCode === 40 && direction !== 'UP') direction = 'DOWN';
+
+    if (e.keyCode === 65 && direction !== 'RIGHT') direction = 'LEFT';
+    if (e.keyCode === 87 && direction !== 'DOWN') direction = 'UP';
+    if (e.keyCode === 68 && direction !== 'LEFT') direction = 'RIGHT';
+    if (e.keyCode === 83 && direction !== 'UP') direction = 'DOWN';
+});
+
+initGame();
+draw();
+</script>
+
+<script>
+// Toggle burger menu
+function toggleMenu() {
+    document.querySelector('.nav-links').classList.toggle('active');
+}
+
+// Close menu when a link is clicked
+document.querySelectorAll('.nav-links li a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.remove('active');
+    });
+});
+</script>
+
+</body>
+</html>
